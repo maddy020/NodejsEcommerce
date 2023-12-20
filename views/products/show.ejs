@@ -1,0 +1,103 @@
+<!-- Importing boilerplate -->
+<% layout('layouts/boilerplate') %>
+    <!-- Importing navbar partial -->
+    <%- include ('../partials/navbar') %>
+        <!-- Show a particular product -->
+        <div style="margin-top: 5rem;" class="row px-5 mb-4">
+            <div class="d-flex justify-content-end">
+                <!-- Importing flash partial -->
+                <%- include ('../partials/flash.ejs') %>
+            </div>
+            <div class="col-lg-6 mt-4">
+                <div class="card shadow mx-auto border border-secondary-subtle" style="width: 19rem;">
+                    <img src=" <%= product.img %> " style="padding: 35px;" class="card-img-top" alt="..."
+                        loading="lazy">
+                    <div class="card-body d-flex flex-column align-items-start gap-3">
+                        <h3 class="card-title fs-6 fw-semibold">
+                            <%= product.name %>
+                        </h3>
+                        <div>
+                            <span class="card-title text-secondary fs-6 text-decoration-line-through">
+                                Rs. <%= product.price*2 %>
+                            </span>
+                            <span class="card-title fs-6 mx-2">
+                                Rs. <%= product.price %>
+                            </span>
+                            <span class="card-title fs-6 text-warning">
+                                ( 50% OFF )
+                            </span>
+                        </div>
+                        <p style="font-size: 14px;" class="card-text mb-0">
+                            <%= product.desc %>
+                        </p>
+                        <div>
+                            <form class="d-inline-block" action="/user/<%= product._id %>/add" method="POST">
+                                <button type="submit" class="btn btn-secondary btn-sm">Add to Cart</button>
+                            </form>
+                            <a href="/product/<%= product._id %>/buy" class="btn btn-success btn-sm mx-3">Buy now</a>
+                            <% if (currentUser && currentUser.role==="seller" ){ %>
+                                <a href="/products/<%= product._id %>/edit" class="btn btn-info btn-sm">Edit</a>
+                                <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- After making the review route making a form for review -->
+            <div class="col-lg-4 mt-4">
+                <h2 class="fs-3">Leave a Review</h2>
+                <form class="mt-3" action="/product/<%= product._id %>/review" method="POST">
+                    <fieldset class="starability-basic">
+                        <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" checked
+                            aria-label="No rating." />
+                        <input type="radio" id="first-rate1" name="rating" value="1" />
+                        <label for="first-rate1" title="Terrible">1 star</label>
+                        <input type="radio" id="first-rate2" name="rating" value="2" />
+                        <label for="first-rate2" title="Not good">2 stars</label>
+                        <input type="radio" id="first-rate3" name="rating" value="3" />
+                        <label for="first-rate3" title="Average">3 stars</label>
+                        <input type="radio" id="first-rate4" name="rating" value="4" />
+                        <label for="first-rate4" title="Very good">4 stars</label>
+                        <input type="radio" id="first-rate5" name="rating" value="5" />
+                        <label for="first-rate5" title="Amazing">5 stars</label>
+                    </fieldset>
+                    <div class="mb-3">
+                        <label for="comment" class="col-sm-2 col-form-label">Comments: </label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" name="comments" id="comment" rows="3"
+                                placeholder="Write your comments"></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-sm">Submit</button>
+                </form>
+                <!-- Showing the reviews -->
+                <div class="my-3">
+                    <% for (let review of product.reviews){ %>
+                        <div class="card mt-3">
+                            <div class="card-header">
+                                <p class="px-1 text-capitalize">
+                                    <i class="fa-solid fa-user mx-1"></i>
+                                    <%= review.author.username %>
+                                </p>
+                                <p class="starability-result mb-0" data-rating="<%= review.rating %>">
+                                    <%= review.rating %>
+                                </p>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text fw-semibold">
+                                    <%= review.comments %>
+                                </p>
+                                <% if (currentUser && currentUser.role==="seller" ){ %>
+                                    <form class="text-end"
+                                        action="/product/<%= product._id %>/review/<%= review._id %>?_method=DELETE"
+                                        method="POST">
+                                        <button class="btn p-0"><i class="fa-solid fa-trash"
+                                                style="color: #ff0000;"></i></button>
+                                    </form>
+                                    <% } %>
+                            </div>
+                        </div>
+                        <% } %>
+                </div>
+            </div>
+        </div>

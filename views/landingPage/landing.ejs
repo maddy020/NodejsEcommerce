@@ -1,0 +1,47 @@
+<!-- Importing the boilerplate file -->
+<% layout('layouts/boilerplate') %>
+    <!-- Importing flash partial -->
+    <%- include ('../partials/flash.ejs') %>
+        <div class="landing-container">
+            <div class="bg-image">
+                <img class="object-fit-cover w-100" src="/images/bg-image.jpeg" alt="landing-page" loading="lazy">
+            </div>
+            <div class="middle-content position-absolute top-50 start-50 translate-middle text-center text-white">
+                <h2 class="fs-2 fw-medium mb-3">Shopping Cart</h2>
+                <p class="mb-0">Welcome to shopping cart!</p>
+                <p class="mb-0">Jump right in and explore our many products.</p>
+                <p class="mb-0">Feel free to add some of your own and comment on others!</p>
+                <a href="/products" class="btn btn-outline-light btn-sm mt-4">View Products</a>
+            </div>
+            <nav style="background-color: transparent !important;"
+                class="landing-navbar navbar navbar-expand-lg bg-body-tertiary position-absolute w-100 top-0 z-3">
+                <div class="container-fluid justify-content-around">
+                    <a class="text-white navbar-brand fs-3" href="#">Shopping Cart</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse flex-grow-0" id="navbarTogglerDemo02">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-4">
+                            <li class="nav-item">
+                                <a class="text-white-50 nav-link active fs-5" aria-current="page" href="/">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="text-white-50 nav-link active fs-5" aria-current="page"
+                                    href="/products">Products</a>
+                            </li>
+                            <li class="nav-item">
+                                <% if (!currentUser){ %>
+                                    <a class="text-white-50 nav-link active fs-5" aria-current="page"
+                                        href="/login">Login</a>
+                                    <% } else { %>
+                                        <span class="text-white-50 nav-link fs-5">Hello, <%= currentUser.username %>
+                                        </span>
+                                        <% } %>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>

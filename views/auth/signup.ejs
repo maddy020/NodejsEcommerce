@@ -1,0 +1,43 @@
+<!-- Importing boilerplate -->
+<% layout('layouts/boilerplate') %>
+    <!-- Importing the navbar partial -->
+    <%- include ('../partials/navbar') %>
+        <!-- Show a particular product -->
+        <div class="row" style="margin-top: 6rem !important;">
+            <div class="d-flex justify-content-end px-4">
+                <!-- Importing flash partial -->
+                <%- include ('../partials/flash.ejs') %>
+            </div>
+            <div class="col-md-6 mx-auto mt-4 mb-5 p-5 rounded shadow">
+                <h1 class="display-6 text-center">Sign up</h1>
+                <form action="/signup" method="POST">
+                    <div class="mt-3">
+                        <label class="form-label" for="email">Email: </label>
+                        <input class="form-control" type="email" name="email" id="email" placeholder="Enter your email">
+                    </div>
+                    <div class="mt-3">
+                        <label class="form-label" for="username">Username: </label>
+                        <input class="form-control" type="text" name="username" id="username"
+                            placeholder="Enter your username">
+                    </div>
+                    <div class="mt-3">
+                        <label class="form-label" for="password">Password: </label>
+                        <input class="form-control" type="password" name="password" id="password"
+                            placeholder="Enter your password">
+                    </div>
+                    <div class="mt-3">
+                        <p>Want to register as ?</p>
+                        <div class="mx-2">
+                            <label class="form-label" for="buyer">Buyer: </label>
+                            <input class="form-check-input" type="radio" name="role" value="buyer" id="buyer">
+                        </div>
+                        <div class="mx-2">
+                            <label class="form-label" for="seller">Seller: </label>
+                            <input class="form-check-input" type="radio" name="role" value="seller" id="seller">
+                        </div>
+                    </div>
+                    <button type="submit" class="mt-3 btn btn-sm btn-success">Sign up</button>
+                    <p class="fw-light mt-3">Already have an account, <a href="/login">Login</a></p>
+                </form>
+            </div>
+        </div>

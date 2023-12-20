@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Indic+Siyaq+Numbers&family=Play&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans Indic Siyaq Numbers', sans-serif;
+    background-color: #f5f5f5;
+    overflow-x: hidden;
+}
+
+/*======================== Landing Page ===========================*/
+
+.bg-image img {
+    height: 100vh;
+    filter: brightness(0.5);
+}
+
+.landing-navbar ul li a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #fff;
+    transition: width .3s;
+}
+
+.landing-navbar ul li a:hover::after {
+    width: 100%;
+    transition: width .3s;
+}
+
+/*================== Product Page  ===================*/
+
+.main-navbar .container-fluid {
+    width: 85%;
+}
